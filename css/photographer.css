@@ -1,17 +1,141 @@
+/* Section contains informations of photograph, contact button and photograph profile picture */
+.photograph-header {
+    max-width: 1440px;
+    height: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    background-color: #FAFAFA;
+}
+
+
+/* Container of informations of photographer (name, location, description) */
+.photograph-informations {
+    margin-left: 50px;
+}
+
+/* Container of photographer profile picture */
+.photograph-picture {
+    margin-right: 50px;
+}
+
+/* Profile picture of photographer */
+.picture-profile {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Photographer description */
+.tagline-description {
+    margin: 3px 0 0 0;
+    font-size: 1.3em;
+    color: #525252;
+}
+
+
+
+.sort {
+    display: flex;
+    max-width: 1440px;
+    height: 50px;
+    align-items: center;
+    margin: 20px auto;
+}
+
+
+
+.pictures-photographer {
+    /* height: 200px; */
+    max-width: 1440px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px 150px;
+    margin: 50px auto;
+}
+
+.picture-photographer, .video-photographer {
+    width: 350px;
+    height: 350px;
+    flex-shrink: 1;
+    flex-grow: 1;
+    border-radius: 5px;
+    /* background-color: #DB8876; */
+}
+
+.picture, .video {
+    height: 300px;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.picture img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.video video {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.picture-informations, .video-informations {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* background-color: #3d1dcc; */
+    background-color: #fff;
+}
+
+.picture-title, .video-title {
+    color: #901C1C;
+    font-size: 2em;
+}
+
+.btn-like {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #901C1C;
+    cursor: pointer;
+}
+
+.link-picture {
+    display: block;
+}
+
+
+
+.label-sort {
+    font-size: 1.8em;
+    font-weight: 700;
+}
+
+
 #contact_modal {
     display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999999;
+    background: rgba(196, 196, 196, 0.4);
 }
 
-.photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
-}
-
-.contact_button {
+.contact-button {
     font-size: 20px;
     font-weight: bold;
     color: white;
+    margin-top: 26px;
     padding: 11px;
     width: 170px;
     height: 70px;
@@ -20,6 +144,11 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+.contact-name {
+    display: block;
+}
+
 
 .modal {
     border-radius: 5px;
@@ -31,6 +160,7 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    position: relative;
 }
 
 .modal header {
@@ -40,12 +170,16 @@
 
 .modal header img {
     cursor: pointer;
+    position: absolute;
+    top: 35px;
+    right: 35px;
 }
 
 .modal header h2 {
     font-size: 64px;
     font-weight: normal;
-    text-align: center;
+    text-align: left;
+    margin-bottom: 20px;
 }
 
 form {
@@ -65,12 +199,141 @@ form div {
     flex-direction: column;
     width: 100%;
     align-items: self-start;
-    margin-bottom: 26px;
+    margin-bottom: 14px;
 }
 
 form input {
     width: 100%;
     height: 68px;
+    font-size: 1.6em;
     border: none;
     border-radius: 5px;
+}
+
+textarea {
+    width: 100%;
+    height: 170px;
+    border: none;
+    border-radius: 5px;
+}
+
+.likes-price-photographer {
+    display: flex;
+    width: 320px;
+    height: 65px;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 9999;
+    right: 100px;
+    bottom: 0;
+    padding: 0 20px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 2em;
+    background-color: #DB8876;
+}
+
+
+
+.lightbox-bg {
+    display: none;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    /* background-color: #901C1C; */
+}
+
+.lightbox {
+    display: flex;
+    width: 70%;
+    height: 90%;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    /* background-color: #b84040; */
+}
+
+.close-lightbox {
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 5em;
+    color: #901C1C;
+    cursor: pointer;
+    /* background-color: #080f6d; */
+}
+
+.previous-slide {
+    width: 80px;
+    height: 50px;
+    font-size: 5em;
+    color: #901C1C;
+    cursor: pointer;
+    /* background-color: #7c1212; */
+}
+
+.slide-img {
+    max-width: 950px;
+    max-height: 780px;
+}
+
+.slide-img img, .slide-img video {
+    display: none;
+    max-width: 950px;
+    max-height: 780px;
+    object-fit: cover;
+}
+
+.next-slide {
+    width: 80px;
+    height: 50px;
+    font-size: 5em;
+    color: #901C1C;
+    cursor: pointer;
+    /* background-color: #7c1212; */
+}
+
+.lightbox-title {
+    font-size: 2.4em;
+    color: #901C1C;
+}
+
+
+
+i {
+    padding-left: 7px;
+}
+
+textarea {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+
+.list-sort {
+    width: 140px;
+    height: 50px;
+    margin-left: 30px;
+    padding: 15px;
+    border: 1px solid #901C1C;
+    color: #fff;
+    font-size: 1.6em;
+    appearance: none;
+    background-color: #901C1C;
+}
+
+.list-sort:focus, .list-sort:active {
+    border: 1px solid #901C1C;
 }
