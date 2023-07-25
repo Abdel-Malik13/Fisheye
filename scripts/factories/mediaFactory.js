@@ -26,7 +26,7 @@ class MediaFactory {
         picture.classList.add('picture');
         linkPicture.appendChild(picture);
 
-        pictureImg.setAttribute('src', `../../assets/images/${photo.image}`);
+        pictureImg.setAttribute('src', `../../Fisheye/assets/images/${photo.image}`);
         pictureImg.setAttribute('alt', photo.title);
         picture.appendChild(pictureImg);
 
