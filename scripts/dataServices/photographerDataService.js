@@ -50,7 +50,7 @@ async function getPhotographerById(id) {
 
 async function getPhotosOfPhotographer(idPhotographer) {
     console.log("get photos");
-    return await fetch("../../data/photographers.json")
+    return await fetch("../../Fisheye/data/photographers.json")
         .then(function(response) {
             return response.json();
         })
