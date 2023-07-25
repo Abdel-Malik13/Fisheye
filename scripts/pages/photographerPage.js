@@ -64,6 +64,7 @@ const slideImg = document.querySelector('.slide-img > img');
 const slideVideo = document.querySelector('.slide-img > video');
 let linkPicturesSelect = [];
 const main = document.querySelector('#main');
+const lightboxTitle = document.querySelector('.lightbox-title');
 
 
 let indexSlidePicture = 0;
@@ -81,6 +82,8 @@ function addEventListenerForPictures() {
         link.addEventListener('click', function(e) {
             e.preventDefault();
 
+            console.log(e.target.getAttribute('alt'));
+
             indexSlidePicture = index;
 
             openLightbox();
@@ -93,12 +96,16 @@ function addEventListenerForPictures() {
                 // slideImg.setAttribute('src', e.target.children[0].children[0].getAttribute('src'));
                 console.log(e.target);
                 slideImg.setAttribute('src', this.children[0].children[0].getAttribute('src'));
+                slideImg.setAttribute('alt', this.children[0].children[0].getAttribute('alt'));
+                lightboxTitle.textContent = this.children[0].children[0].getAttribute('alt');
             } else {
                 console.log("Affichage vidéo");
                 slideImg.style.display = "none";
                 slideVideo.style.display = "block";
                 console.log(this.children[1]);
                 slideVideo.setAttribute('src', this.children[1].getAttribute('src'));
+                slideVideo.setAttribute('alt', this.children[1].getAttribute('alt'));
+                lightboxTitle.textContent = this.children[1].getAttribute('alt');
             }
         });
     }
@@ -106,6 +113,7 @@ function addEventListenerForPictures() {
 
 previousLightboxSlide.addEventListener('click', function() {
     changeSlide(-1);
+    console.log(slideImg.getAttribute('alt'));
 });
 
 previousLightboxSlide.addEventListener('keydown', function(e) {
@@ -148,6 +156,8 @@ function changeSlide(slideDirection) {
         slideImg.style.display = "block";
         slideVideo.style.display = "none";
         slideImg.setAttribute('src', linkPicturesSelect[indexSlidePicture].children[0].children[0].getAttribute('src'));
+        slideImg.setAttribute('alt', linkPicturesSelect[indexSlidePicture].children[0].children[0].getAttribute('alt'));
+        lightboxTitle.textContent = linkPicturesSelect[indexSlidePicture].children[0].children[0].getAttribute('alt');
     } else {
         slideImg.style.display = "none";
         slideVideo.style.display = "block";
