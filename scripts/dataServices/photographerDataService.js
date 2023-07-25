@@ -5,7 +5,7 @@
 
 async function getPhotographers() {
 
-    return await fetch("../../data/photographers.json")
+    return await fetch("../../Fisheye/data/photographers.json")
         .then(function(response) {
             return response.json();
         })
@@ -17,7 +17,7 @@ async function getPhotographers() {
 
 async function getPhotographerById(id) {
 
-    return fetch("../../data/photographers.json")
+    return fetch("../../Fisheye/data/photographers.json")
     .then(function(response) {
         return response.json();
     })
