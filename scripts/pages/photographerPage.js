@@ -261,6 +261,8 @@ async function init() {
     // Récupère les datas des photographes
     const userId = (new URL(document.location)).searchParams.get("id");
     photographerInformations = await getPhotographerById(userId);
+    console.log(photographerInformations);
+    document.title = document.title + ' ' + photographerInformations.user.name;
     PhotographerFactory.displayUserBlock(photographerInformations);
     MediaFactory.displayUserMedias(getMediasWithSorted(''));
     addEventListenerForPictures();
