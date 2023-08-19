@@ -1,3 +1,5 @@
+import { displayModal } from "../utils/contactForm.js";
+
 class PhotographerFactory {
 
     static getUserCardDOM(data) {
@@ -41,7 +43,6 @@ class PhotographerFactory {
     }
 
     static displayUserBlock(data) {
-        console.log("getUserPage");
 
         const photographHeader = document.querySelector('.photograph-header');
         const photographerInformations = document.createElement('article');
@@ -79,7 +80,7 @@ class PhotographerFactory {
 
 
         btnModal.classList.add('contact-button');
-        btnModal.setAttribute('onclick', 'displayModal()');
+        btnModal.addEventListener('click', displayModal);
         btnModal.setAttribute('tabindex', '2');
         btnModal.textContent = 'Contactez-moi';
         contactName.textContent = `${data.user.name}`
@@ -96,7 +97,6 @@ class PhotographerFactory {
         photographImg.appendChild(pictureProfile);
 
 
-        // likes.textContent = 
         let heartsUser = 0;
         for (let index = 0; index < data.medias.length; index++) {
             const element = data.medias[index].likes;
@@ -120,3 +120,5 @@ class PhotographerFactory {
     }
 
 }
+
+export { PhotographerFactory };

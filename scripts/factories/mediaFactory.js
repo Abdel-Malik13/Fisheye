@@ -12,7 +12,6 @@ class MediaFactory {
         const allLikesUser = document.querySelector('.likes');
         const likesHeart = document.createElement('i');
         const iconHeart = document.createElement('i');
-        const lightboxTitle = document.querySelector('.lightbox-title');
 
 
         picturePhotographer.classList.add('picture-photographer');
@@ -40,12 +39,13 @@ class MediaFactory {
         btnLike.classList.add('btn-like');
         btnLike.setAttribute('data-id', photo.id);
         btnLike.setAttribute('tabindex', '4');
+        btnLike.setAttribute('aria-label', 'rating');
+        btnLike.setAttribute('role', 'img');
         btnLike.textContent = localStorage.getItem(`id-${photo.id}`) ? localStorage.getItem(`id-${photo.id}`):`${photo.likes}`;
         btnLike.addEventListener('click', function() {
             let liked = localStorage.getItem(`id-${this.dataset.id}-liked`) == null ? false:localStorage.getItem(`id-${this.dataset.id}-liked`);
 
             if (liked === "true") {
-                console.log("Tu as déjà liké cette photo");
                 this.textContent--;
                 allLikesUser.textContent--;
                 this.appendChild(iconHeart);
@@ -65,9 +65,7 @@ class MediaFactory {
             let liked = localStorage.getItem(`id-${this.dataset.id}-liked`) == null ? false:localStorage.getItem(`id-${this.dataset.id}-liked`);
 
             if (e.keyCode === 13) {
-                console.log('liked');
                 if (liked === "true") {
-                    console.log("Tu as déjà liké cette photo");
                     this.textContent--;
                     allLikesUser.textContent--;
                     this.appendChild(iconHeart);
@@ -93,8 +91,6 @@ class MediaFactory {
         pictureInformations.appendChild(btnLike);
 
 
-        // console.log(photo.title);
-        // lightboxTitle.textContent = photo.title;
 
         return (picturePhotographer);
 
@@ -124,9 +120,7 @@ class MediaFactory {
         const videoTitle = document.createElement('h2');
         const videoLikes = document.createElement('span');
         const videoPlayer = document.createElement('video');
-        const videoPlayerSource = document.createElement('source');
         const playerStart = document.createElement('i');
-        const lightboxTitle = document.querySelector('.lightbox-title');
 
 
         videoPhotographer.classList.add('video-photographer');
@@ -203,10 +197,8 @@ class MediaFactory {
         
         videoInformations.appendChild(videoLikes);
 
-
-        // console.log(picturesPhotographer);
-        // console.log(videoPhotographer);
-        // console.log(`videos ${videos}`);
     }
 
 }
+
+export { MediaFactory };

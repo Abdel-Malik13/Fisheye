@@ -1,9 +1,6 @@
-//Mettre le code JavaScript lié à la page photographer.html
-// const url = (new URL(document.location)).searchParams.get("id");
-// console.log(parseInt(url));
+import { MediaFactory } from "../factories/mediaFactory.js";
 
-
-async function getPhotographers() {
+export async function getPhotographers() {
 
     return await fetch("./data/photographers.json")
         .then(function(response) {
@@ -15,7 +12,7 @@ async function getPhotographers() {
 
 }
 
-async function getPhotographerById(id) {
+export async function getPhotographerById(id) {
 
     return fetch("./data/photographers.json")
     .then(function(response) {
@@ -34,7 +31,6 @@ async function getPhotographerById(id) {
             }
         }
 
-
         for (let index = 0; index < data.media.length; index++) {
             const photographerMedia = data.media[index];
 
@@ -48,8 +44,7 @@ async function getPhotographerById(id) {
     })
 }
 
-async function getPhotosOfPhotographer(idPhotographer) {
-    console.log("get photos");
+export async function getPhotosOfPhotographer(idPhotographer) {
     return await fetch("./data/photographers.json")
         .then(function(response) {
             return response.json();
@@ -59,31 +54,16 @@ async function getPhotosOfPhotographer(idPhotographer) {
             for (let index = 0; index < data.media.length; index++) {
                 const media = data.media[index];
 
-                // console.log(media);
-                
                 if (media.photographerId === idPhotographer) {
                     
-                    // console.log(media);
                     if (media.image) {
                         MediaFactory.getUserPictures(media);
-                        // console.log(`media.image ${media.image}`);
                     } else if (media.video) {
                         MediaFactory.displayUserVideo(media);
-                        // console.log(`media.video ${media.video}`);
                     } else {
                         throw "Unknow media";
                     }
-
-                    // mediaFactory(media, media).getUserPictures(media);
                 }
             }
         })
 }
-
-
-
-// getPhotographer(parseInt(url))
-
-// getPhotographerByWithSort()
-
-// getPhotosOfPhotographer(82)

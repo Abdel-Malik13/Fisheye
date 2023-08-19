@@ -1,61 +1,8 @@
-function formSubmit(e) {
-    const firstName = document.querySelector('#firstName');
-    const lastName = document.querySelector('#lastName');
-    const email = document.querySelector('#email');
-    const message = document.querySelector('#message');
+import { getPhotographerById } from "../dataServices/photographerDataService.js";
+import { MediaFactory } from "../factories/mediaFactory.js";
+import { PhotographerFactory } from "../factories/photographerFactory.js";
+import { closeModal } from "../utils/contactForm.js";
 
-    e.preventDefault();
-
-    const formData = [];
-    const errorsForm = [];
-    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-
-    if (firstName.value.length !== 0) {
-        console.log("firstName success");
-        formData.push(firstName.value);
-    } else {
-        console.log("Le prénom saisi est invalide");
-        errorsForm.push("Le prénom saisi est invalide");
-    }
-
-    if (lastName.value.length !== 0) {
-        console.log("lastName success");
-        formData.push(lastName.value);
-    } else {
-        console.log("Le nom saisi est invalide");
-        errorsForm.push("Le nom saisi est invalide");
-    }
-
-    if (email.value.match(emailRegex)) {
-        console.log("email success");
-        formData.push(email.value);
-    } else {
-        console.log("L'adresse email saisie est invalide");
-        errorsForm.push("L'adresse email saisie est invalide");
-    }
-
-    if (message.value.length !== 0) {
-        console.log("Message success");
-        formData.push(message.value);
-    } else {
-        console.log("Vueillez entrer un message");
-        errorsForm.push("Veuillez entrer un message");
-    }
-
-
-    if (errorsForm.length > 0) {
-        console.log("Il y a des erreurs dans le formulaire");
-    } else {
-    }
-
-}
-
-// Get pictures for lightbox
-
-
-// Lorsque je clique sur une image
-// Je veux afficher l'image sur laquelle j'ai cliqué
 const lightbox = document.querySelector('.lightbox-bg');
 const closeLightboxBtn = document.querySelector('.close-lightbox');
 const previousLightboxSlide = document.querySelector('.previous-slide');
@@ -65,24 +12,20 @@ const slideVideo = document.querySelector('.slide-img > video');
 let linkPicturesSelect = [];
 const main = document.querySelector('#main');
 const lightboxTitle = document.querySelector('.lightbox-title');
+const closeModalBtn = document.querySelector('.close-contact-from');
+
 
 
 let indexSlidePicture = 0;
 
-
 function addEventListenerForPictures() {
     linkPicturesSelect = document.querySelectorAll('.link-picture');
-    console.log(linkPicturesSelect);
 
     for (let index = 0; index < linkPicturesSelect.length; index++) {
         const link = linkPicturesSelect[index];
 
-        // console.log(link.children[0].children[0]);
-
         link.addEventListener('click', function(e) {
             e.preventDefault();
-
-            console.log(e.target.getAttribute('alt'));
 
             indexSlidePicture = index;
 
@@ -90,19 +33,14 @@ function addEventListenerForPictures() {
 
 
             if (this.children[0].tagName === "DIV") {
-                console.log("Affichage image");
                 slideImg.style.display = "block";
                 slideVideo.style.display = "none";
-                // slideImg.setAttribute('src', e.target.children[0].children[0].getAttribute('src'));
-                console.log(e.target);
                 slideImg.setAttribute('src', this.children[0].children[0].getAttribute('src'));
                 slideImg.setAttribute('alt', this.children[0].children[0].getAttribute('alt'));
                 lightboxTitle.textContent = this.children[0].children[0].getAttribute('alt');
             } else {
-                console.log("Affichage vidéo");
                 slideImg.style.display = "none";
                 slideVideo.style.display = "block";
-                console.log(this.children[1]);
                 slideVideo.setAttribute('src', this.children[1].getAttribute('src'));
                 slideVideo.setAttribute('alt', this.children[1].getAttribute('alt'));
                 lightboxTitle.textContent = this.children[1].getAttribute('alt');
@@ -113,7 +51,6 @@ function addEventListenerForPictures() {
 
 previousLightboxSlide.addEventListener('click', function() {
     changeSlide(-1);
-    console.log(slideImg.getAttribute('alt'));
 });
 
 previousLightboxSlide.addEventListener('keydown', function(e) {
@@ -137,6 +74,30 @@ closeLightboxBtn.addEventListener('keydown', function(e) {
         closeLightbox();
     }
 })
+
+closeLightboxBtn.addEventListener('click', closeLightbox);
+
+closeModalBtn.addEventListener('click', closeModal);
+
+
+document.addEventListener('keydown', function(e) {
+
+    if (lightbox.style.display === 'flex') {
+        if (e.keyCode === 27) {
+            closeLightbox();
+        }
+
+        if (e.keyCode === 37) {
+            changeSlide(- 1);
+        }
+
+        if (e.keyCode === 39) {
+            changeSlide(+ 1);
+        }
+    }
+
+})
+
 
 
 function changeSlide(slideDirection) {
@@ -177,35 +138,6 @@ function closeLightbox() {
     main.setAttribute('aria-hidden', false);
     lightbox.setAttribute('aria-hidden', true);
 }
-
-closeLightboxBtn.addEventListener('click', closeLightbox);
-
-document.addEventListener('keydown', function(e) {
-
-    if (lightbox.style.display === 'flex') {
-        if (e.keyCode === 27) {
-            console.log('Lightbox close');
-            closeLightbox();
-        }
-    } else {
-        console.log('lightbox déjà fermée');
-    }
-
-    if (lightbox.style.display === 'flex') {
-        if (e.keyCode === 37) {
-            console.log('Slide précédente');
-            changeSlide(- 1);
-        }
-    }
-
-    if (lightbox.style.display === 'flex') {
-        if (e.keyCode === 39) {
-            console.log('Slide suivante');
-            changeSlide(+ 1);
-        }
-    }
-
-})
 
 
 
@@ -248,10 +180,9 @@ const formSort = document.querySelector('#sort');
 formSort.addEventListener('change', function() {
 
     let picturesPhotographerRefresh = document.querySelector('.pictures-photographer');
+    const picturesSorted = getMediasWithSorted(this.value);
 
     picturesPhotographerRefresh.innerHTML = '';
-
-    const picturesSorted = getMediasWithSorted(this.value);
 
     MediaFactory.displayUserMedias(picturesSorted);
     addEventListenerForPictures();
@@ -261,16 +192,14 @@ async function init() {
     // Récupère les datas des photographes
     const userId = (new URL(document.location)).searchParams.get("id");
     photographerInformations = await getPhotographerById(userId);
-    console.log(photographerInformations);
     document.title = document.title + ' ' + photographerInformations.user.name;
     PhotographerFactory.displayUserBlock(photographerInformations);
     MediaFactory.displayUserMedias(getMediasWithSorted(''));
     addEventListenerForPictures();
-};
+}
 
 
-const contactForm = document.querySelector('form');
-contactForm.addEventListener('submit', formSubmit);
+
 
 
 let photographerInformations = {};

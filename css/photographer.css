@@ -51,13 +51,14 @@
     /* height: 200px; */
     max-width: 1440px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 40px 150px;
     margin: 50px auto;
 }
 
 .picture-photographer, .video-photographer {
+    max-width: 380px;
     width: 350px;
     height: 350px;
     flex-shrink: 1;
@@ -245,7 +246,6 @@ textarea {
     top: 0;
     bottom: 0;
     background-color: #ffffff;
-    /* background-color: #901C1C; */
 }
 
 .lightbox {
@@ -260,7 +260,6 @@ textarea {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #ffffff;
-    /* background-color: #b84040; */
 }
 
 .close-lightbox {
@@ -272,7 +271,6 @@ textarea {
     font-size: 5em;
     color: #901C1C;
     cursor: pointer;
-    /* background-color: #080f6d; */
 }
 
 .previous-slide {
@@ -281,7 +279,6 @@ textarea {
     font-size: 5em;
     color: #901C1C;
     cursor: pointer;
-    /* background-color: #7c1212; */
 }
 
 .slide-img {
@@ -302,7 +299,6 @@ textarea {
     font-size: 5em;
     color: #901C1C;
     cursor: pointer;
-    /* background-color: #7c1212; */
 }
 
 .lightbox-title {
