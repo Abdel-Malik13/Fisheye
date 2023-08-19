@@ -16,6 +16,57 @@ const closeModalBtn = document.querySelector('.close-contact-from');
 
 
 
+const contactForm = document.querySelector('form');
+contactForm.addEventListener('submit', formSubmit);
+
+function formSubmit(e) {
+    const firstName = document.querySelector('#firstName');
+    const lastName = document.querySelector('#lastName');
+    const email = document.querySelector('#email');
+    const message = document.querySelector('#message');
+
+    e.preventDefault();
+
+    const formData = [];
+    const errorsForm = [];
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+
+    if (firstName.value.length !== 0) {
+        formData.push(firstName.value);
+    } else {
+        errorsForm.push("Le prénom saisi est invalide");
+    }
+
+    if (lastName.value.length !== 0) {
+        formData.push(lastName.value);
+    } else {
+        errorsForm.push("Le nom saisi est invalide");
+    }
+
+    if (email.value.match(emailRegex)) {
+        formData.push(email.value);
+    } else {
+        errorsForm.push("L'adresse email saisie est invalide");
+    }
+
+    if (message.value.length !== 0) {
+        formData.push(message.value);
+    } else {
+        errorsForm.push("Veuillez entrer un message");
+    }
+
+
+    if (errorsForm.length == 0) {
+        console.log(formData);
+    } else {
+        console.log(errorsForm);
+    }
+
+}
+
+
+
 let indexSlidePicture = 0;
 
 function addEventListenerForPictures() {
